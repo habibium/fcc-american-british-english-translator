@@ -11,7 +11,7 @@ suite("Functional Tests", () => {
     test("Translation with text and locale fields", (done) => {
       testTranslation({
         text: "Mangoes are my favorite fruit.",
-        locale: "american-to-british",
+        locale: Translator.LOCALES[0],
         translation:
           'Mangoes are my <span class="highlight">favourite</span> fruit.',
         done,
@@ -30,7 +30,7 @@ suite("Functional Tests", () => {
 
     test("Translation with missing text field", (done) => {
       testTranslation({
-        locale: "american-to-british",
+        locale: Translator.LOCALES[0],
         done,
       });
     });
@@ -72,22 +72,22 @@ function testTranslation({ text, locale, translation, done }) {
     .end((err, res) => {
       assert.equal(res.status, 200);
 
-      if (!Translator.LOCALES.includes(locale)) {
-        assert.property(res.body, "error");
-        assert.equal(res.body.error, "Invalid value for locale field");
-        done();
-      }
-
       if (!text || !locale) {
         assert.property(res.body, "error");
         assert.equal(res.body.error, "Required field(s) missing");
-        done();
+        return done();
+      }
+
+      if (!Translator.LOCALES.includes(locale)) {
+        assert.property(res.body, "error");
+        assert.equal(res.body.error, "Invalid value for locale field");
+        return done();
       }
 
       assert.property(res.body, "text");
       assert.property(res.body, "translation");
       assert.equal(res.body.text, text);
       assert.equal(res.body.translation, translation);
-      done();
+      return done();
     });
 }
