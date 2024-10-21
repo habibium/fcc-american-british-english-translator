@@ -4,6 +4,11 @@ const americanToBritishTitles = require("./american-to-british-titles.js");
 const britishOnly = require("./british-only.js");
 
 class Translator {
+  /**
+   * @type {['american-to-british', 'british-to-american']}
+   */
+  static LOCALES = ["american-to-british", "british-to-american"];
+
   toBritish(text) {
     // TODO
     return text;
@@ -20,6 +25,11 @@ class Translator {
   }
 
   toAmericanHighlighted(text) {
+    // TODO
+    return text;
+  }
+
+  translate(text, locale) {
     // TODO
     return text;
   }
