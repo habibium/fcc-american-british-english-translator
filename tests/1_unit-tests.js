@@ -170,4 +170,42 @@ suite("Unit Tests", () => {
       done();
     });
   });
+
+  suite("Highlight translation in text", () => {
+    test("Mangoes are my favorite fruit.", (done) => {
+      assert.equal(
+        translator.toBritishHighlighted("Mangoes are my favorite fruit."),
+        'Mangoes are my <span class="highlight">favourite</span> fruit.'
+      );
+      done();
+    });
+
+    test("I ate yogurt for breakfast.", (done) => {
+      assert.equal(
+        translator.toBritishHighlighted("I ate yogurt for breakfast."),
+        'I ate <span class="highlight">yoghurt</span> for breakfast.'
+      );
+      done();
+    });
+
+    test("We watched the footie match for a while.", (done) => {
+      assert.equal(
+        translator.toAmericanHighlighted(
+          "We watched the footie match for a while."
+        ),
+        'We watched the <span class="highlight">soccer</span> match for a while.'
+      );
+      done();
+    });
+
+    test("Paracetamol takes up to an hour to work.", (done) => {
+      assert.equal(
+        translator.toAmericanHighlighted(
+          "Paracetamol takes up to an hour to work."
+        ),
+        '<span class="highlight">Tylenol</span> takes up to an hour to work.'
+      );
+      done();
+    });
+  });
 });
