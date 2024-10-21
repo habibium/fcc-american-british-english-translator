@@ -72,7 +72,13 @@ function testTranslation({ text, locale, translation, done }) {
     .end((err, res) => {
       assert.equal(res.status, 200);
 
-      if (!text || !locale) {
+      if (!text) {
+        assert.property(res.body, "error");
+        assert.equal(res.body.error, "No text to translate");
+        return done();
+      }
+
+      if (!locale) {
         assert.property(res.body, "error");
         assert.equal(res.body.error, "Required field(s) missing");
         return done();

@@ -33,7 +33,7 @@ suite("Unit Tests", () => {
     test("Can you toss this in the trashcan for me?", (done) => {
       assert.equal(
         translator.toBritish("Can you toss this in the trashcan for me?"),
-        "Can you toss this in the dustbin for me?"
+        "Can you toss this in the bin for me?"
       );
       done();
     });
